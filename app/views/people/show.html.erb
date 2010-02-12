@@ -1,0 +1,33 @@
+<p>
+  <b>Name:</b>
+  <%=h @person.name %>
+</p>
+
+<p>
+  <b>Latitude:</b>
+  <%=h @person.latitude %>
+</p>
+
+<p>
+  <b>Longitude:</b>
+  <%=h @person.longitude %>
+</p>
+
+<p>
+  <b>Zip:</b>
+  <%=h @person.zip %>
+</p>
+
+<p>
+  <b>Twitter:</b>
+  <%=h @person.twitter %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%=h @person.url %>
+</p>
+
+
+<%= link_to 'Edit', edit_person_path(@person) %> |
+<%= link_to 'Back', people_path %>
