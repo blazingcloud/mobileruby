@@ -1,7 +1,20 @@
 class PeopleController < ApplicationController
+  CURRENT_CONFERENCE = 2
+  
   # GET /people
   # GET /people.xml
   def index
+    @conf = Conference.find(CURRENT_CONFERENCE)
+    @people = @conf.attendees
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @people }
+      format.json  { render :json => @people.to_json }
+    end
+  end
+
+  def all
     @people = Person.all
 
     respond_to do |format|
@@ -14,6 +27,7 @@ class PeopleController < ApplicationController
   # GET /people/1
   # GET /people/1.xml
   def show
+    @conf = Conference.find(CURRENT_CONFERENCE)    
     @person = Person.find(params[:id])
 
     respond_to do |format|
@@ -38,14 +52,25 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
   end
 
+  # add to current conference
+  # GET /people/1/add
+  def add
+    @conf = Conference.find(CURRENT_CONFERENCE)
+    @person = Person.find(params[:id])
+    @conf.attendees << @person
+    @conf.save!
+    redirect_to(@person)
+  end
+
   # POST /people
   # POST /people.xml
   def create
-    @person = Person.new(params[:person])
+    @conf = Conference.find(CURRENT_CONFERENCE)
+    @person = @conf.build(params[:person])
 
     respond_to do |format|
       if @person.save
-        flash[:notice] = 'Person was successfully created.'
+        flash[:notice] = "#{@conf.name} attendee was successfully created."
         format.html { redirect_to(@person) }
         format.xml  { render :xml => @person, :status => :created, :location => @person }
       else

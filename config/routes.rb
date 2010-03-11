@@ -3,6 +3,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.root :controller => 'people'
   map.resources :people
+  map.all 'all', :controller => 'people', :action => 'all'
 
   # The priority is based upon order of creation: first created -> highest priority.
 

@@ -28,6 +28,15 @@
   <%=h @person.url %>
 </p>
 
+<h2>Conferences</h2>
+<ul>
+<% @person.conferences.each do |conf| %>
+  <li><%= "#{conf.name} #{conf.year}"%></li>  
+<% end %>
+</ul>
+<p>
+<%= link_to "Add to list of people attending #{@conf.name}", "/people/add/#{@person.id}" %>
+</p>
 
 <%= link_to 'Edit', edit_person_path(@person) %> |
 <%= link_to 'Back', people_path %>
