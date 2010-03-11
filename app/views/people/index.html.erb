@@ -1,5 +1,15 @@
-<h1>People attending <%= @conf.name %></h1>
+<h1>Mobile <%= @conf.name %></h1>
 <p>If you attended another conference and just want to add this one, see list of <%= link_to "all people", "/all"%></p>
+<p>If you are new, you can record your attendance at MRWC, by filling in <%= link_to 'this form', new_person_path %></p>
+
+<h2>Get RubyConf App</h2>
+<ul>
+  <li><a href="http://itunes.apple.com/us/app/ruby-conf/id356336915?mt=8">iPhone</a></li>
+  <li><a href="/app.apk">Android</a></li>
+
+</ul>
+
+<h1>People attending <%= @conf.name %></h1>
 
 <table>
   <tr>
@@ -17,8 +27,8 @@
     <td><%=h person.latitude %></td>
     <td><%=h person.longitude %></td>
     <td><%=h person.zip %></td>
-    <td><%=h person.twitter %></td>
-    <td><%=h person.url %></td>
+    <td><%= link_to h(person.twitter), "http://www.twitter.com/#{person.twitter[0,1] == '@' ? person.twitter[1,person.twitter.length-1] : person.twitter}" %></td>
+    <td><%= link_to h(person.url), person.url %></td>
     <td><%= link_to 'Show', person %></td>
     <td><%= link_to 'Edit', edit_person_path(person) %></td>
   </tr>
@@ -27,4 +37,3 @@
 
 <br />
 
-<%= link_to 'New person', new_person_path %>
