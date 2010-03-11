@@ -6,13 +6,16 @@ describe Person do
       @valid_attributes = {
         :name => "Jim Weirich"
       }
+      @person = Person.create!(@valid_attributes)
     end
 
     it "should create a new instance given valid attributes" do
-      p = Person.create!(@valid_attributes)
-      p.should be_valid
+      @person.should be_valid
     end
 
+    it "should have a list of conferences" do
+      @person.conferences.should == []
+    end
 
   end
   describe "invalid attributes" do

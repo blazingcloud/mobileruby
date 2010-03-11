@@ -7,11 +7,15 @@ describe Conference do
         :name => "LA Ruby Conference",
         :year => 2010
       }
+      @conf = Conference.create!(@valid_attributes)
     end
 
     it "should create a new instance given valid attributes" do
-      c = Conference.create!(@valid_attributes)
-      c.should be_valid
+      @conf.should be_valid
+    end
+
+    it "should have a list of attendees" do
+      @conf.attendees.should == []
     end
 
 
