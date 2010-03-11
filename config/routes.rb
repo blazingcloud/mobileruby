@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :conferences
+
   map.root :controller => 'people'
   map.resources :people
 
